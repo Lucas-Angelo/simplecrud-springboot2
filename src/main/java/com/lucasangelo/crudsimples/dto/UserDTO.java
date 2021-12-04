@@ -1,6 +1,7 @@
 package com.lucasangelo.crudsimples.dto;
 
 import java.io.Serializable;
+import java.util.*;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
@@ -9,6 +10,7 @@ import javax.validation.constraints.Size;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonProperty.Access;
 import com.lucasangelo.crudsimples.models.User;
+import com.lucasangelo.crudsimples.models.Product;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -37,10 +39,13 @@ public class UserDTO implements Serializable {
     @JsonProperty(access = Access.WRITE_ONLY) // Not to show this field in response
     private String password;
 
+    private List<Product> products = new ArrayList<Product>();
+
     public UserDTO(User obj) {
         this.id = obj.getId();
         this.name = obj.getName();
         this.email = obj.getEmail();
+        this.products = obj.getProducts();
     }
 
 }
