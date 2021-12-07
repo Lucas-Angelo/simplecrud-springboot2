@@ -31,7 +31,8 @@ public class SecurityConfig  extends WebSecurityConfigurerAdapter{
 
     static {
         PUBLIC_MATCHERS = new String[]{
-            "/h2-console/**"
+            "/h2-console/**",
+            "/user/**"
         };
         PUBLIC_MATCHERS_GET = new String[] {
             "/product/**"
@@ -68,8 +69,8 @@ public class SecurityConfig  extends WebSecurityConfigurerAdapter{
 		return source;
 	}
 
-    @Bean
-    public BCryptPasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();
-    }
+	@Bean
+	public BCryptPasswordEncoder bCryptPasswordEncoder() {
+		return new BCryptPasswordEncoder();
+	}
 }

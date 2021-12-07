@@ -28,12 +28,12 @@ public class UserService {
 
     public User create(User obj) {
         obj.setId(null); // To protect if Id isn't null...
-        obj.setPassword(bCryptPasswordEncoder.encode(obj.getPassword()));
+        obj.setPassword(obj.getPassword());
         return this.userRepository.save(obj);
     }
 
     public User update(User obj) {
-        obj.setPassword(bCryptPasswordEncoder.encode(obj.getPassword()));
+        obj.setPassword(obj.getPassword());
         User newObj = find(obj.getId());
 		updateData(newObj, obj);
 		return this.userRepository.save(newObj);
@@ -60,11 +60,11 @@ public class UserService {
     }
 
     public User fromDTO(UserDTO objDto) {
-        return new User(objDto.getId(), objDto.getName(), objDto.getEmail(), objDto.getPassword(), null);
+        return new User(objDto.getId(), objDto.getName(), objDto.getEmail(), null, null);
     }
 
     public User fromDTO(UserNewDTO objDto) {
-        return new User(null, objDto.getName(), objDto.getEmail(), objDto.getPassword(), null);
+        return new User(null, objDto.getName(), objDto.getEmail(), bCryptPasswordEncoder.encode(objDto.getPassword()), null);
     }
 
 	public Page<User> findPage(Integer page, Integer linesPerPage, String orderBy, String direction) {
