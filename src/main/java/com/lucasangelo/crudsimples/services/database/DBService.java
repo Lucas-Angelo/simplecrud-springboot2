@@ -4,6 +4,7 @@ import java.util.Arrays;
 
 import com.lucasangelo.crudsimples.models.Product;
 import com.lucasangelo.crudsimples.models.User;
+import com.lucasangelo.crudsimples.models.enums.Profile;
 import com.lucasangelo.crudsimples.repositories.ProductRepository;
 import com.lucasangelo.crudsimples.repositories.UserRepository;
 
@@ -28,9 +29,10 @@ public class DBService {
 		Product product2 = new Product(null, "Windows 10 Pro", 1000.00d, null);
 		this.productRepository.saveAll(Arrays.asList(product1, product2));
 
-		User user1 = new User(null, "Lucas", "lcs2001_@lucasangelo.com", this.bCryptPasswordEncoder.encode("supersenha"), null);
-		User user2 = new User(null, "Ana", "ana@email.com", this.bCryptPasswordEncoder.encode("supersenha"), null);
+		User user1 = new User(null, "Lucas", "lcs2001_@lucasangelo.com", this.bCryptPasswordEncoder.encode("supersenha"));
+		User user2 = new User(null, "Ana", "ana@email.com", this.bCryptPasswordEncoder.encode("supersenha"));
 		user1.setProducts(Arrays.asList(product1, product2));
+		user1.addProfile(Profile.ADMIN);
 		user2.setProducts(Arrays.asList(product2));
 		this.userRepository.saveAll(Arrays.asList(user1, user2));
 

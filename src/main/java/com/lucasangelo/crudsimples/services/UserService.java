@@ -60,11 +60,11 @@ public class UserService {
     }
 
     public User fromDTO(UserDTO objDto) {
-        return new User(objDto.getId(), objDto.getName(), objDto.getEmail(), null, null);
+        return new User(objDto.getId(), objDto.getName(), objDto.getEmail(), null);
     }
 
     public User fromDTO(UserNewDTO objDto) {
-        return new User(null, objDto.getName(), objDto.getEmail(), bCryptPasswordEncoder.encode(objDto.getPassword()), null);
+        return new User(null, objDto.getName(), objDto.getEmail(), bCryptPasswordEncoder.encode(objDto.getPassword()));
     }
 
 	public Page<User> findPage(Integer page, Integer linesPerPage, String orderBy, String direction) {
