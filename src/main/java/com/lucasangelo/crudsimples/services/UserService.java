@@ -6,7 +6,10 @@ import java.util.Optional;
 import com.lucasangelo.crudsimples.dto.UserDTO;
 import com.lucasangelo.crudsimples.dto.UserNewDTO;
 import com.lucasangelo.crudsimples.models.User;
+import com.lucasangelo.crudsimples.models.enums.Profile;
 import com.lucasangelo.crudsimples.repositories.UserRepository;
+import com.lucasangelo.crudsimples.security.UserSS;
+import com.lucasangelo.crudsimples.services.exceptions.AuthorizationException;
 import com.lucasangelo.crudsimples.services.exceptions.DataIntegrityException;
 import com.lucasangelo.crudsimples.services.exceptions.ObjectNotFoundException;
 
@@ -14,6 +17,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort.Direction;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Repository;
 
@@ -33,6 +37,12 @@ public class UserService {
     }
 
     public User update(User obj) {
+
+        UserSS user = authenticated();
+		if (user==null || !user.hasRole(Profile.ADMIN) && !user.equals(user)) {
+			throw new AuthorizationException("Acesso negado");
+		}
+
         obj.setPassword(obj.getPassword());
         User newObj = find(obj.getId());
 		updateData(newObj, obj);
@@ -49,6 +59,12 @@ public class UserService {
     }
 
     public User find(Integer id) {
+
+        UserSS user = authenticated();
+		if (user==null || !user.hasRole(Profile.ADMIN) && !id.equals(user.getId())) {
+			throw new AuthorizationException("Acesso negado");
+		}
+
         Optional<User> obj = this.userRepository.findById(id); 
         return obj.orElseThrow(() -> new ObjectNotFoundException(
             "Objeto não encontrado! Id: " + id + ", Tipo: " + User.class.getName())
@@ -78,4 +94,13 @@ public class UserService {
         newObj.setEmail(obj.getEmail());
         newObj.setPassword(obj.getPassword());
     }
+
+    public static UserSS authenticated() {
+		try {
+			return (UserSS) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		}
+		catch (Exception e) {
+			return null;
+		}
+	}
 }
