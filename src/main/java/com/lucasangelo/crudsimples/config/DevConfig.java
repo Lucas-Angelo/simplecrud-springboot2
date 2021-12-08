@@ -21,7 +21,8 @@ public class DevConfig {
     @Bean
     public boolean instantiateDatabase() {
 
-        if(!this.strategy.equals("create"))
+        // Insert data only test strategy
+        if(!this.strategy.equals("create") /*&& !this.strategy.equals("validate")*/ )
             return false;
 
         this.dbService.instantiateTestDatabase();

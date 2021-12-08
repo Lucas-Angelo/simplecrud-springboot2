@@ -47,6 +47,7 @@ public class User implements Serializable {
     
     @ElementCollection(fetch = FetchType.EAGER) // Force get profiles with user
     @CollectionTable(name = "profile")
+    @Column(name="profile")
     private Set<Integer> profiles = new HashSet<>();
 
     public User() {
