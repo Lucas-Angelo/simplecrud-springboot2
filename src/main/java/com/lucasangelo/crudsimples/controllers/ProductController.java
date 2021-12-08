@@ -73,4 +73,11 @@ public class ProductController {
         Page<Product> list = this.productService.findPage(page, linesPerPage, orderBy, direction);
         return ResponseEntity.ok().body(list);
     }
+    
+    @RequestMapping(value = "/buy/{id}", method = RequestMethod.POST)
+    public ResponseEntity<Product> buy(@PathVariable Integer id) {
+        Product obj = this.productService.find(id);
+        this.productService.buy(obj);
+        return ResponseEntity.ok().body(obj);
+    }
 }

@@ -39,6 +39,9 @@ public class UserDTO implements Serializable {
     @JsonProperty(access = Access.WRITE_ONLY) // Not to show this field in response
     private String password;
 
+    @NotEmpty(message = "Preenchimento obrigatório")
+    private double balance;
+
     private List<Product> products = new ArrayList<Product>();
 
     public UserDTO(User obj) {

@@ -37,6 +37,7 @@ public class User implements Serializable {
     private String email;
     @JsonIgnore
     private String password;
+    private double balance;
 
     @ManyToMany
     @JoinTable(
@@ -54,11 +55,12 @@ public class User implements Serializable {
       addProfile(Profile.USER);
     }
 
-    public User(Integer id, String name, String email, String password) {
+    public User(Integer id, String name, String email, String password, double balance) {
       this.id = id;
       this.name = name;
       this.email = email;
       this.password = password;
+      this.balance = balance;
       addProfile(Profile.USER);
     }
   
@@ -68,6 +70,10 @@ public class User implements Serializable {
     
     public void addProfile(Profile perfil) {
       this.profiles.add(perfil.getCode());
+    }
+
+    public void addProducts(List<Product> products) {
+      this.products.addAll(products);
     }
 
 }

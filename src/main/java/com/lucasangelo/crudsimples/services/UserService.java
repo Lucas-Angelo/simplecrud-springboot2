@@ -33,6 +33,7 @@ public class UserService {
     public User create(User obj) {
         obj.setId(null); // To protect if Id isn't null...
         obj.setPassword(obj.getPassword());
+        obj.setBalance(0.0d);
         return this.userRepository.save(obj);
     }
 
@@ -76,11 +77,11 @@ public class UserService {
     }
 
     public User fromDTO(UserDTO objDto) {
-        return new User(objDto.getId(), objDto.getName(), objDto.getEmail(), null);
+        return new User(objDto.getId(), objDto.getName(), objDto.getEmail(), null, objDto.getBalance());
     }
 
     public User fromDTO(UserNewDTO objDto) {
-        return new User(null, objDto.getName(), objDto.getEmail(), bCryptPasswordEncoder.encode(objDto.getPassword()));
+        return new User(null, objDto.getName(), objDto.getEmail(), bCryptPasswordEncoder.encode(objDto.getPassword()), objDto.getBalance());
     }
 
 	public Page<User> findPage(Integer page, Integer linesPerPage, String orderBy, String direction) {
