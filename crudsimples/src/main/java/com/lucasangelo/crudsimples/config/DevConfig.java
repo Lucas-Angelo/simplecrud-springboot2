@@ -22,7 +22,7 @@ public class DevConfig {
     public boolean instantiateDatabase() {
 
         // Insert data only test strategy
-        if(!this.strategy.equals("create") /*&& !this.strategy.equals("validate")*/ )
+        if(!this.strategy.equals("create") && !this.strategy.equals("create-drop") /*&& !this.strategy.equals("validate")*/ )
             return false;
 
         this.dbService.instantiateTestDatabase();

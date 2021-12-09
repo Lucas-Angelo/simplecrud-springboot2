@@ -8,17 +8,17 @@
     <persistence-unit name="exemplo-jpa" transaction-type="RESOURCE_LOCAL">
         <properties>
             <property name="javax.persistence.jdbc.url"
-                value="jdbc:mysql://localhost/simplecrud?useSSL=false&amp;serverTimezone=UTC" />
+                value="jdbc:mysql://0.0.0.0:3306/simplecrud?autoReconnect=true&amp;allowPublicKeyRetrieval=true&amp;useSSL=false&amp;serverTimezone=UTC" />
 
             <property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver" />
 
             <property name="javax.persistence.jdbc.user" value="root" />
             <property name="javax.persistence.jdbc.password" value="root" />
             
-            <property name="hibernate.hbm2ddl.auto" value="update" />
-
+            <property name="hibernate.hbm2ddl.auto" value="create" />
+            <property name="hibernate.show_sql" value="true" />
             <!-- https://docs.jboss.org/hibernate/orm/5.4/javadocs/org/hibernate/dialect/package-summary.html -->
-            <property name="hibernate.dialect" value="org.hibernate.dialect.MySQL8Dialect" />
+            <property name="hibernate.dialect" value="org.hibernate.dialect.MySQLInnoDBDialect" />
         </properties>
     </persistence-unit>
 

@@ -1,0 +1,33 @@
+version: '3'
+services:
+ 
+  docker-mysql:
+   container_name: docker-mysql
+   image: mysql/mysql-server:5.7
+   environment:
+    MYSQL_ROOT_HOST: 'docker-mysql'
+    MYSQL_DATABASE: 'simplecrud'
+    MYSQL_USER: 'root'
+    MYSQL_ROOT_PASSWORD: 'root'
+    MYSQL_PASSWORD: 'root'
+   ports:
+   - "3306:3306"
+   restart: always
+  
+  crudsimples:
+    restart: always
+    build: ./crudsimples
+    working_dir: /crudsimples
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://docker-mysql:3306/simplecrud?autoReconnect=true&allowPublicKeyRetrieval=true&useSSL=false&serverTimezone=UTC
+    volumes:
+      - ./crudsimples:/crudsimples
+      - ~/.m2:/root/.m2
+    ports:
+      - "8080:8080"
+      - "8083:8083"
+    expose:
+      - "8080"
+    command: mvn clean spring-boot:run
+    depends_on:
+      - docker-mysql
