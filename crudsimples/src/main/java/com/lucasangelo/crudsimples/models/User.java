@@ -49,10 +49,10 @@ public class User implements Serializable {
     @ElementCollection(fetch = FetchType.EAGER) // Force get profiles with user
     @CollectionTable(name = "profile")
     @Column(name="profile")
-    private Set<Integer> profiles = new HashSet<>();
+    private Set<Integer> profiles = new HashSet<Integer>();
 
     public User() {
-      addProfile(Profile.USER);
+      this.addProfile(Profile.USER);
     }
 
     public User(Integer id, String name, String email, String password, double balance) {
@@ -61,7 +61,7 @@ public class User implements Serializable {
       this.email = email;
       this.password = password;
       this.balance = balance;
-      addProfile(Profile.USER);
+      this.addProfile(Profile.USER);
     }
   
     public Set<Profile> getProfiles() {

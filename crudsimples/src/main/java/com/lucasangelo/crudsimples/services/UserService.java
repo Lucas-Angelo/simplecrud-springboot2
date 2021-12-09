@@ -81,7 +81,7 @@ public class UserService {
     }
 
     public User fromDTO(UserNewDTO objDto) {
-        return new User(null, objDto.getName(), objDto.getEmail(), bCryptPasswordEncoder.encode(objDto.getPassword()), objDto.getBalance());
+        return new User(null, objDto.getName(), objDto.getEmail(), this.bCryptPasswordEncoder.encode(objDto.getPassword()), objDto.getBalance());
     }
 
 	public Page<User> findPage(Integer page, Integer linesPerPage, String orderBy, String direction) {
