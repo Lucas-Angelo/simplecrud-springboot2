@@ -18,6 +18,7 @@ services:
     restart: always
     build: ./crudsimples
     working_dir: /crudsimples
+    container_name: crudsimples
     environment:
       SPRING_DATASOURCE_URL: jdbc:mysql://docker-mysql:3306/simplecrud?autoReconnect=true&allowPublicKeyRetrieval=true&useSSL=false&serverTimezone=UTC
     volumes:
