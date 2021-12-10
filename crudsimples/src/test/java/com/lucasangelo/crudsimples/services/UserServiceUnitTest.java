@@ -1,10 +1,9 @@
-package com.lucasangelo.crudsimples.service;
+package com.lucasangelo.crudsimples.services;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import com.lucasangelo.crudsimples.models.User;
 import com.lucasangelo.crudsimples.models.enums.Profile;
-import com.lucasangelo.crudsimples.services.UserService;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -13,7 +12,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 @SpringBootTest
-public class UserServiceTest {
+public class UserServiceUnitTest {
     
     @Autowired
     private BCryptPasswordEncoder bCryptPasswordEncoder;

@@ -15,7 +15,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 @SpringBootTest
-public class UserTest {
+public class UserUnitTest {
     
     @Autowired
     private BCryptPasswordEncoder bCryptPasswordEncoder;
